@@ -1,0 +1,53 @@
+name: array_of_aliens
+version: 0.1.0
+
+authors:
+  - AndyRosenberg <andynaterosenberg@gmail.com>
+
+crystal: 0.28.0
+
+license: UNLICENSED
+
+targets:
+  array_of_aliens:
+    main: src/array_of_aliens.cr
+
+  amber:
+    main: lib/amber/src/amber/cli.cr
+
+dependencies:
+  amber:
+    github: amberframework/amber
+    version: 0.28.0
+    #branch: master
+
+  granite:
+    github: amberframework/granite
+    version: ~> 0.15.0
+
+  quartz_mailer:
+    github: amberframework/quartz-mailer
+    version: ~> 0.5.1
+
+  jasper_helpers:
+    github: amberframework/jasper-helpers
+    version: ~> 0.2.1
+
+  pg:
+    github: will/crystal-pg
+    version: ~> 0.16.1
+
+  citrine-i18n:
+    github: amberframework/citrine-i18n
+    version: 0.3.2
+  
+  google_maps_api:
+    github: fridgerator/google_maps_api
+  
+  json_on_steroids:
+    github: anykeyh/json_on_steroids
+
+development_dependencies:
+  garnet_spec:
+    github: amberframework/garnet-spec
+    version: ~> 0.2.1
