@@ -20,8 +20,9 @@ class User < Granite::Base
   field token : String
   field sent_time : Time
 
-  def my_distances
-    @distances = JSON.parse(distances || Hash(String, String | Int32).new.to_json).on_steroids!
+  def set_distances
+    empty_json = Hash(String, String | Int32).new.to_json
+    @distances = JSON.parse(distances || empty_json).on_steroids!
   end
   
   def location
@@ -37,8 +38,8 @@ class User < Granite::Base
   end
 
   def current_distance_from?(other : User)
-    return false unless @distance["#{other.id}"] && @distance["#{other.id}"]["location"] == other.location
-    @distance["#{other.id}"]["distance"]
+    return false unless @distances["#{other.id}"] && @distances["#{other.id}"]["location"] == other.location
+    @distances["#{other.id}"]["distance"]
   end
   
   def maps_distance_from(other : User)
@@ -59,7 +60,10 @@ class User < Granite::Base
   end
 
   def get_distance(other : User)
-    current_distance_from?(other) || save_new_distance(other)
+    set_distances
+    current_distance = current_distance_from?(other)
+    return current_distance if current_distance
+    save_new_distance(other)
     current_distance_from?(other)
   end
 end
