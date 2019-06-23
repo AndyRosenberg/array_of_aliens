@@ -75,4 +75,8 @@ class User < Granite::Base
     save_new_distance(other)
     current_distance_from?(other)
   end
+
+  def distance_from(other : User)
+    get_distance(other).to_s.to_i
+  end
 end
