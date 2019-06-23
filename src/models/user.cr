@@ -1,5 +1,5 @@
 class User < Granite::Base
-  @distances = JSON::OnSteroids.new
+  @distances_on_roids = JSON::OnSteroids.new
 
   adapter pg
   table_name users
@@ -22,7 +22,7 @@ class User < Granite::Base
 
   def set_distances
     empty_json = Hash(String, String | Int32).new.to_json
-    @distances = JSON.parse(distances || empty_json).on_steroids!
+    @distances_on_roids = JSON.parse(distances || empty_json).on_steroids!
   end
   
   def location
@@ -30,21 +30,30 @@ class User < Granite::Base
   end
 
   def possible_location?
-    city && state
+    !!(city && state)
   end
 
-  def no_locations_from_either?(other : User)
+  def locations_from_both?(other : User)
     possible_location? && other.possible_location?
   end
 
   def current_distance_from?(other : User)
-    return false unless @distances["#{other.id}"] && @distances["#{other.id}"]["location"] == other.location
-    @distances["#{other.id}"]["distance"]
+    hsh = @distances_on_roids["#{other.id}"]? || Hash(String, String | Int32).new
+    return false unless location_exists?(hsh, other)
+    hsh["distance"]?
+  end
+
+  private def location_exists?(hsh, other : User)
+    hsh["distance"]? && location_converted?(hsh["location"]?) == other.location
+  end
+
+  private def location_converted?(loc)
+    loc.to_s.lchop?.to_s.rchop?
   end
   
   def maps_distance_from(other : User)
     begin
-      raise "" if no_locations_from_either?(other)
+      raise "" unless locations_from_both?(other)
       req = GoogleMapsApi::Client.get("directions", {:origin => "#{location}", :destination => "#{other.location}"})
       req = JSON.parse(req.to_s).on_steroids!
       req[0]["legs"][0]["distance"]["value"]
@@ -54,8 +63,8 @@ class User < Granite::Base
   end
 
   def save_new_distance(other : User)
-    @distances[other.id] = { :distance => maps_distance_from(other), :location => other.location }
-    self.distances = @distances.to_json
+    @distances_on_roids["#{other.id}"] = { "distance" => maps_distance_from(other), "location" => other.location }
+    self.distances = @distances_on_roids.to_json
     save
   end
 
