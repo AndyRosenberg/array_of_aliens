@@ -76,6 +76,10 @@ shards:
     github: amberframework/micrate
     version: 0.3.3
 
+  mocks:
+    github: waterlink/mocks.cr
+    version: 0.9.6
+
   mysql:
     github: crystal-lang/crystal-mysql
     version: 0.6.0
@@ -107,6 +111,10 @@ shards:
   shell-table:
     github: luckyframework/shell-table.cr
     commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
+
+  singleton:
+    github: waterlink/singleton.cr
+    version: 1.0.0
 
   slang:
     github: jeromegn/slang
