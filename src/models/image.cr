@@ -4,7 +4,11 @@ class Image < Granite::Base
 
   primary id : Int64
   user_id : Int64
-  profile : Boolean
+  profile : Bool
   object_key : String
   timestamps
+
+  def generate_key
+    Random::Secure.hex(15)
+  end
 end
