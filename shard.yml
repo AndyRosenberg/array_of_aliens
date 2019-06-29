@@ -47,6 +47,9 @@ dependencies:
   json_on_steroids:
     github: anykeyh/json_on_steroids
 
+  awscr-s3:
+    github: taylorfinnell/awscr-s3
+
 development_dependencies:
   garnet_spec:
     github: amberframework/garnet-spec

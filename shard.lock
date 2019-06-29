@@ -8,6 +8,14 @@ shards:
     github: amberframework/amber-router
     version: 0.3.0
 
+  awscr-s3:
+    github: taylorfinnell/awscr-s3
+    version: 0.3.4
+
+  awscr-signer:
+    github: taylorfinnell/awscr-signer
+    version: 0.5.4
+
   callback:
     github: mosop/callback
     version: 0.6.3
