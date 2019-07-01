@@ -20,6 +20,14 @@ class Image < Granite::Base
     )
 
     body = File.read(File.expand_path(filepath))
-    client.put_object(ENV["AWS_BUCKET"], generate_key, body)
+    extension = (/\.([A-Za-z0-9]+)$/.match(filepath) || "")[0]
+    ext = extension.to_s[1..-1]
+
+    client.put_object(
+      ENV["AWS_BUCKET"],
+      generate_key + extension,
+      body,
+      {"Content-Type" => "image/#{ext}"}
+    )
   end
 end
