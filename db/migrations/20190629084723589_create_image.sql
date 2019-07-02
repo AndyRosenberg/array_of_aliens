@@ -4,6 +4,7 @@ CREATE TABLE images (
   user_id INTEGER REFERENCES users,
   profile BOOLEAN DEFAULT FALSE,
   object_key VARCHAR,
+  object_url VARCHAR,
   created_at TIMESTAMP,
   updated_at TIMESTAMP
 );
