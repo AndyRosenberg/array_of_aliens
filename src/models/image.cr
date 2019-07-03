@@ -9,10 +9,10 @@ class Image < Granite::Base
   field object_url : String
   timestamps
 
-  def upload(filepath : String)
+  def upload(filepath : String, body : String)
+    return false if body.blank?
     get_client
 
-    body = File.read(File.expand_path(filepath))
     extension = (/\.([A-Za-z0-9]+)$/.match(filepath) || " ")[0].downcase
     ext = mimed(extension.to_s[1..-1])
     key = (generate_key + extension).strip

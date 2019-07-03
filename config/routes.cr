@@ -29,6 +29,7 @@ Amber::Server.configure do
 
   routes :web do
     get "/", HomeController, :index
+    post "/upload", HomeController, :upload
   end
 
   routes :api do
