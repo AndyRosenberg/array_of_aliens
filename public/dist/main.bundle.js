@@ -18198,6 +18198,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var amber__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! amber */ "./lib/amber/assets/js/amber.js");
 
 
+document.addEventListener("DOMContentLoaded", function (event) {
+  var filepath = document.getElementById("filepath");
+  filepath.addEventListener("change", function (e) {
+    var file = filepath.files[0];
+    var reader = new FileReader();
+    var img = document.getElementById("imgbody");
+    reader.addEventListener("load", function () {
+      img.setAttribute('value', reader.result);
+    }, false);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  });
+});
 
 /***/ }),
 

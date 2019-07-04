@@ -11,13 +11,12 @@ class Image < Granite::Base
 
   def upload(filepath : String, body : String)
     return false if body.blank?
-    get_client
 
     extension = (/\.([A-Za-z0-9]+)$/.match(filepath) || " ")[0].downcase
     ext = mimed(extension.to_s[1..-1])
     key = (generate_key + extension).strip
 
-    object = @client.put_object(
+    object = client.put_object(
                ENV["AWS_BUCKET"],
                key,
                body,
@@ -35,8 +34,8 @@ class Image < Granite::Base
     "https://#{ENV["AWS_BUCKET"]}.s3-#{ENV["AWS_REGION"]}.amazonaws.com/#{key}"
   end
 
-  private def get_client
-    @client = Awscr::S3::Client.new(
+  private def client
+    Awscr::S3::Client.new(
       ENV["AWS_REGION"],
       ENV["S3_ACCESS_KEY_ID"],
       ENV["S3_ACCESS_KEY_SECRET"]

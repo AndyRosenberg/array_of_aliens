@@ -4,6 +4,6 @@ class HomeController < ApplicationController
   end
 
   def upload
-    #
+    Image.new().upload(params[:filepath], params[:imgbody])
   end
 end
