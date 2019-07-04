@@ -1,3 +1,5 @@
+require "base64"
+
 class Image < Granite::Base
   adapter pg
   table_name images
@@ -12,6 +14,8 @@ class Image < Granite::Base
   def self.upload(filepath : String, body : String)
     return false if body.blank?
 
+    body = Base64.decode_string(body)
+
     extension = (/\.([A-Za-z0-9]+)$/.match(filepath) || " ")[0].downcase
     ext = mimed(extension.to_s[1..-1])
     key = (generate_key + extension).strip
@@ -20,7 +24,7 @@ class Image < Granite::Base
                ENV["AWS_BUCKET"],
                key,
                body,
-               {"Content-Type" => "image/#{ext}"}
+               {"Content-Type" => "image/#{ext}", "Content-Encoding" => "base64"}
              )
 
     create(object_key: key, object_url: get_url(key))

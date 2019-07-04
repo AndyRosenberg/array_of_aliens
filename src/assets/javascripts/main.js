@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var img = document.getElementById("imgbody");
 
     reader.addEventListener("load", function () {
-      img.setAttribute('value', reader.result);
+      img.setAttribute('value', reader.result.split(",")[1]);
     }, false);
 
     if (file) {
