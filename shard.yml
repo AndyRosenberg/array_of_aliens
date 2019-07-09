@@ -41,8 +41,9 @@ dependencies:
     github: amberframework/citrine-i18n
     version: 0.3.2
   
-  google_maps_api:
-    github: fridgerator/google_maps_api
+  halite:
+    github: icyleaf/halite
+    version: 0.10.2
   
   json_on_steroids:
     github: anykeyh/json_on_steroids

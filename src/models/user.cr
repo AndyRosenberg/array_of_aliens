@@ -54,12 +54,22 @@ class User < Granite::Base
   def maps_distance_from(other : User)
     begin
       raise "" unless locations_from_both?(other)
-      req = GoogleMapsApi::Client.get("directions", {:origin => "#{location}", :destination => "#{other.location}"})
-      req = JSON.parse(req.to_s).on_steroids!
-      req[0]["legs"][0]["distance"]["value"]
+      req = distance_api_get(other)
+      req["rows"][0]["elements"][0]["distance"]["value"]
     rescue exception
       999999
     end
+  end
+
+  private def distance_api_get(other : User)
+    Halite.get(
+      "https://maps.googleapis.com/maps/api/distancematrix/json",
+      params: {
+        origins: location,
+        destinations: other.location,
+        key: ENV["GOOGLE_API_KEY"]
+      }
+    ).parse.on_steroids!
   end
 
   def save_new_distance(other : User)
