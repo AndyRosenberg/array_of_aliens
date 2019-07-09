@@ -48,13 +48,13 @@ shards:
     github: amberframework/garnet-spec
     version: 0.2.1
 
-  google_maps_api:
-    github: fridgerator/google_maps_api
-    commit: 2618d8c077d4ec96b0e1c0356cf28fed76dc17da
-
   granite:
     github: amberframework/granite
     version: 0.15.2
+
+  halite:
+    github: icyleaf/halite
+    version: 0.10.2
 
   i18n:
     github: TechMagister/i18n.cr
@@ -83,10 +83,6 @@ shards:
   micrate:
     github: amberframework/micrate
     version: 0.3.3
-
-  mocks:
-    github: waterlink/mocks.cr
-    version: 0.9.6
 
   mysql:
     github: crystal-lang/crystal-mysql
@@ -119,10 +115,6 @@ shards:
   shell-table:
     github: luckyframework/shell-table.cr
     commit: 078a04ea58ead5203bb435a3b5fff448ddabaeea
-
-  singleton:
-    github: waterlink/singleton.cr
-    version: 1.0.0
 
   slang:
     github: jeromegn/slang

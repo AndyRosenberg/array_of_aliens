@@ -55,6 +55,3 @@ development_dependencies:
   garnet_spec:
     github: amberframework/garnet-spec
     version: ~> 0.2.1
-  mocks:
-    github: waterlink/mocks.cr
-    version: ~> 0.9
