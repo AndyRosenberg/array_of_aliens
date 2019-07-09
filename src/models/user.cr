@@ -20,21 +20,27 @@ class User < Granite::Base
   field token : String
   field sent_time : Time
 
+  def distance_from(other : User)
+    get_distance(other).to_s.to_i
+  end
+
+  def get_distance(other : User)
+    set_distances
+    current_distance = current_distance_from?(other)
+    return current_distance if current_distance
+    save_new_distance(other)
+    current_distance_from?(other)
+  end
+
   def set_distances
     empty_json = Hash(String, String | Int32).new.to_json
     @distances_on_roids = JSON.parse(distances || empty_json).on_steroids!
   end
-  
-  def location
-    "#{city} #{state}"
-  end
 
-  def possible_location?
-    !!(city && state)
-  end
-
-  def locations_from_both?(other : User)
-    possible_location? && other.possible_location?
+  def save_new_distance(other : User)
+    @distances_on_roids["#{other.id}"] = { "distance" => maps_distance_from(other), "location" => other.location }
+    self.distances = @distances_on_roids.to_json
+    save
   end
 
   def current_distance_from?(other : User)
@@ -51,6 +57,14 @@ class User < Granite::Base
     loc.to_s.lchop?.to_s.rchop?
   end
   
+  def location
+    "#{city} #{state}"
+  end
+
+  def possible_location?
+    !!(city && state)
+  end
+
   def maps_distance_from(other : User)
     begin
       raise "" unless locations_from_both?(other)
@@ -59,6 +73,10 @@ class User < Granite::Base
     rescue exception
       999999
     end
+  end
+
+  def locations_from_both?(other : User)
+    possible_location? && other.possible_location?
   end
 
   private def distance_api_get(other : User)
@@ -70,23 +88,5 @@ class User < Granite::Base
         key: ENV["GOOGLE_API_KEY"]
       }
     ).parse.on_steroids!
-  end
-
-  def save_new_distance(other : User)
-    @distances_on_roids["#{other.id}"] = { "distance" => maps_distance_from(other), "location" => other.location }
-    self.distances = @distances_on_roids.to_json
-    save
-  end
-
-  def get_distance(other : User)
-    set_distances
-    current_distance = current_distance_from?(other)
-    return current_distance if current_distance
-    save_new_distance(other)
-    current_distance_from?(other)
-  end
-
-  def distance_from(other : User)
-    get_distance(other).to_s.to_i
   end
 end
