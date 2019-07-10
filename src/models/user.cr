@@ -20,6 +20,10 @@ class User < Granite::Base
   field token : String
   field sent_time : Time
 
+  def preferred?(other : User)
+    split_preferences.includes?(other.gender)
+  end
+
   def distance_from(other : User)
     get_distance(other).to_s.to_i
   end
@@ -88,5 +92,9 @@ class User < Granite::Base
         key: ENV["GOOGLE_API_KEY"]
       }
     ).parse.on_steroids!
+  end
+
+  private def split_preferences
+    preference.to_s.split(",")
   end
 end
