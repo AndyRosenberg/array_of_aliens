@@ -20,6 +20,10 @@ class User < Granite::Base
   field token : String
   field sent_time : Time
 
+  def preference_match?(other : User)
+    preferred?(other) && other.preferred?(self)
+  end
+
   def preferred?(other : User)
     split_preferences.includes?(other.gender)
   end
