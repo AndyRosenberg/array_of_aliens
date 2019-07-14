@@ -11,7 +11,7 @@ class Image < Granite::Base
   field object_url : String
   timestamps
 
-  def self.upload(filepath : String, body : String)
+  def self.upload(filepath : String, body : String, profile : Bool = false)
     return false if body.blank?
 
     body = Base64.decode_string(body)
@@ -27,7 +27,7 @@ class Image < Granite::Base
                {"Content-Type" => "image/#{ext}", "Content-Encoding" => "base64"}
              )
 
-    create(object_key: key, object_url: get_url(key))
+    create(object_key: key, object_url: get_url(key), profile: profile)
   end
 
   private def self.generate_key
