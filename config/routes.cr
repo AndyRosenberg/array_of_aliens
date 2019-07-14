@@ -30,6 +30,7 @@ Amber::Server.configure do
   routes :web do
     get "/", HomeController, :index
     post "/upload", HomeController, :upload
+    resources "/users", UserController, only: [:new, :create]
   end
 
   routes :api do
