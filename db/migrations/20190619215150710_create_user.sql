@@ -15,7 +15,8 @@ CREATE TABLE users (
   distances TEXT,
   password VARCHAR NOT NULL,
   token VARCHAR DEFAULT '',
-  sent_time TIMESTAMP
+  sent_time TIMESTAMP,
+  accepted bool DEFAULT FALSE
 );
 
 

@@ -19,6 +19,7 @@ class User < Granite::Base
   field password : String
   field token : String
   field sent_time : Time
+  field accepted : Bool
 
   def preference_match?(other : User)
     preferred?(other) && other.preferred?(self)
