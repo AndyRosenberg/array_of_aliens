@@ -21,6 +21,17 @@ class User < Granite::Base
   field sent_time : Time
   field accepted : Bool
 
+  def self.create_with_bcrypt(name : String, mail : String, word : String)
+    user = new(name: name, email: mail, password: word)
+    return false unless user.valid?
+    user.password = bcryptify(word)
+    user.save
+  end
+
+  def self.bcryptify(word : String)
+    Crypto::Bcrypt::Password.create(word).to_s
+  end
+
   def preference_match?(other : User)
     preferred?(other) && other.preferred?(self)
   end
