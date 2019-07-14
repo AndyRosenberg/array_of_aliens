@@ -1,3 +1,5 @@
+require "crypto/bcrypt/password"
+
 class User < Granite::Base
   @distances_on_roids = JSON::OnSteroids.new
 
@@ -30,6 +32,42 @@ class User < Granite::Base
 
   def self.bcryptify(word : String)
     Crypto::Bcrypt::Password.create(word).to_s
+  end
+
+  def name_string
+    name.to_s.downcase
+  end
+
+  def email_string
+    email.to_s.downcase
+  end
+
+  def user_matches
+    User.all.select do |usr|
+      usr.name_string == name_string ||
+        usr.email_string == email_string
+    end
+  end
+
+  def one_match_is_current?
+    user_matches.one? && user_matches.first.id == self.id
+  end
+
+  def uniq?
+    user_matches.none? || one_match_is_current?
+  end
+
+  def no_blanks?
+    [name, email, password].none? { |prop| prop.to_s.blank? }
+  end
+
+  def passes_validation?
+    no_blanks? && uniq?
+  end
+
+  def valid?
+    return false unless passes_validation?
+    super
   end
 
   def preference_match?(other : User)
