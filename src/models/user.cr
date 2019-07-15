@@ -70,6 +70,14 @@ class User < Granite::Base
     super
   end
 
+  def update_token
+    update(token: Random::Secure.hex(10), sent_time: Time.now)
+  end
+
+  def clear_token
+    update(token: nil, sent_time: nil)
+  end
+
   def preference_match?(other : User)
     preferred?(other) && other.preferred?(self)
   end
