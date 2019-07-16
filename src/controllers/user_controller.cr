@@ -7,8 +7,10 @@ class UserController < ApplicationController
     if User.create_with_bcrypt(params[:name], params[:email], params[:password])
       user = User.find_by(email: params[:email])
       if user && user.update_token
-        WelcomeMailer.new(user.email_string, user.token.to_s).deliver
+        host = Amber.env.production? ? "#{request.host}" : "localhost:3000"
+        WelcomeMailer.new(user.email_string, user.token.to_s, host).deliver
         flash[:success] = "We just sent a confirmation link to your email. The link will expire in one hour."
+        redirect_to "/users/new"
       else
         failure_flash_new
       end

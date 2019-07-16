@@ -1,9 +1,5 @@
-class WelcomeMailer < Quartz::Composer
-  def sender
-    address email: "admin@po-it.com", name: "Array of Aliens"
-  end
-
-  def initialize(email : String, token : String)
+class WelcomeMailer < ApplicationMailer
+  def initialize(email : String, token : String, host : String)
     to email: email
 
     subject "Confirm your account with Array of Aliens"
