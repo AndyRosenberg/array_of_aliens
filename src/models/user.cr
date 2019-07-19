@@ -42,6 +42,10 @@ class User < Granite::Base
     email.to_s.downcase
   end
 
+  def sent_time?
+    sent_time || 2.hours.ago
+  end
+
   def user_matches
     User.all.select do |usr|
       usr.name_string == name_string ||

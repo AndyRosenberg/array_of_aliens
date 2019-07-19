@@ -31,6 +31,7 @@ Amber::Server.configure do
     get "/", HomeController, :index
     post "/upload", HomeController, :upload
     resources "/users", UserController, only: [:new, :create]
+    get "/confirm/:token", UserController, :confirm
   end
 
   routes :api do
