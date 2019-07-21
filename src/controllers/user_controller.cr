@@ -1,4 +1,10 @@
 class UserController < ApplicationController
+  @user = User.new
+
+  before_action do
+    only [:confirm, :confirmation] { get_current_user }
+  end
+
   def new
     render("new.ecr")
   end
@@ -21,11 +27,14 @@ class UserController < ApplicationController
   end
 
   def confirm
-    user = User.find(session[:user_id]) || User.new
-    truth = get_truth(user)
+    truth = get_truth(@user)
     genders = ["man", "woman", "trans-man", "trans-woman", "fluid", "other"]
     states = ["AL", "AK", "AZ", "AR", "CA", "CO"]
     render("confirm.ecr")
+  end
+
+  def confirmation
+    # insert validations
   end
 
   private def get_truth(user : User)
@@ -35,5 +44,14 @@ class UserController < ApplicationController
   private def failure_flash_new
     flash[:error] = "Something went wrong. Please try again."
     redirect_to "/users/new"
+  end
+
+  private def get_current_user
+    @user = User.find(session[:user_id]) || @user
+    redirect_to "/" if @user.new_record?
+  end
+
+  private def get_preferences
+    params.fetch_all("preferences[]").join(",")
   end
 end
