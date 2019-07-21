@@ -34,7 +34,12 @@ class UserController < ApplicationController
   end
 
   def confirmation
-    # insert validations
+    if successful_confirmation?
+      flash[:success] = "Account creation successful."
+      redirect_to "/"
+    else
+      failure_flash_confirm
+    end
   end
 
   private def get_truth(user : User)
@@ -46,12 +51,39 @@ class UserController < ApplicationController
     redirect_to "/users/new"
   end
 
+  private def failure_flash_confirm
+    flash[:error] = "Something went wrong. Please try again."
+    redirect_to "/users/confirm/#{params[:token]}"
+  end
+
   private def get_current_user
     @user = User.find(session[:user_id]) || @user
     redirect_to "/" if @user.new_record?
   end
 
+  private def successful_confirmation?
+    no_blanks? && update_user_from_confirmation && image_successful? && @user.update(accepted: true)
+  end
+
+  private def no_blanks?
+    !(get_preferences.blank? || params[:city].blank?)
+  end
+
   private def get_preferences
     params.fetch_all("preferences[]").join(",")
+  end
+
+  private def update_user_from_confirmation
+    @user.update(
+      gender: params[:gender],
+      preference: get_preferences,
+      city: params[:city],
+      state: params[:state]
+    )
+  end
+
+  private def image_successful?
+    image = Image.upload(params[:filepath], params[:imgbody], true) || Image.new
+    !image.new_record? && image.update(user_id: @user.id)
   end
 end

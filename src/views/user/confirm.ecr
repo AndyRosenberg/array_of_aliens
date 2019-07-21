@@ -1,6 +1,6 @@
 <div class="container"> 
   <% if truth %>
-    <form action="/confirmation" method="post">
+    <form action="/confirmation/<%= params[:token] %>" method="post">
       <h3 class="mb-3">User Details:</h3>
       <%= csrf_tag %>
       <div class="form-group">

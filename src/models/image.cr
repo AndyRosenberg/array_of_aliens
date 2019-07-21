@@ -11,8 +11,10 @@ class Image < Granite::Base
   field object_url : String
   timestamps
 
+  belongs_to :user
+
   def self.upload(filepath : String, body : String, profile : Bool = false)
-    return false if body.blank?
+    return Image.new if body.blank?
 
     body = Base64.decode_string(body)
 

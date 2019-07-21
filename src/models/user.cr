@@ -23,6 +23,8 @@ class User < Granite::Base
   field sent_time : Time
   field accepted : Bool
 
+  has_many :image
+
   def self.create_with_bcrypt(name : String, mail : String, word : String)
     user = new(name: name, email: mail, password: word)
     return false unless user.valid?
