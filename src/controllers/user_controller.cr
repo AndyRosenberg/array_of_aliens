@@ -53,11 +53,11 @@ class UserController < ApplicationController
 
   private def failure_flash_confirm
     generic_failure_flash
-    redirect_to "/users/confirm/#{params[:token]}"
+    redirect_to "/confirm/#{params[:token]}"
   end
 
   private def generic_failure_flash
-    flash[:error] = "Something went wrong. Please try again."
+    flash[:danger] = "Something went wrong. Please try again."
   end
 
   private def get_current_user
