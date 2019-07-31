@@ -1,20 +1,8 @@
 import 'bootstrap';
 import Amber from 'amber';
+import Vue from 'vue/dist/vue.esm.js';
+import './components/img-uploader.js';
 
-
-document.addEventListener("DOMContentLoaded", function(event) {
-  var filepath = document.getElementById("filepath");
-  filepath.addEventListener("change", function(e) {
-    var file = filepath.files[0];
-    var reader = new FileReader();
-    var img = document.getElementById("imgbody");
-
-    reader.addEventListener("load", function () {
-      img.setAttribute('value', reader.result.split(",")[1]);
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  });
-});
+new Vue({
+  el: '#app'
+})

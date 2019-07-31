@@ -2,8 +2,7 @@
   <div class="col-sm-12 col-md-6">
     <form action="/upload" method="POST">
       <%= csrf_tag %>
-      <input type="file" id="filepath" name="filepath" />
-      <input type="hidden" id="imgbody" name="imgbody" />
+      <img-uploader></img-uploader>
       <button type="submit">Upload</button>
     </form>
   </div>
