@@ -89,6 +89,13 @@ class User < Granite::Base
     update(token: nil, sent_time: nil)
   end
 
+  def available_matches(distance)
+    User.all.select do |user|
+      preference_match?(user) &&
+      distance_from(user) <= distance
+    end.sort_by(&.distance_from(self))
+  end
+
   def preference_match?(other : User)
     preferred?(other) && other.preferred?(self)
   end

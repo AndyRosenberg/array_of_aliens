@@ -10,7 +10,7 @@ shards:
 
   awscr-s3:
     github: taylorfinnell/awscr-s3
-    version: 0.3.4
+    version: 0.4.0
 
   awscr-signer:
     github: taylorfinnell/awscr-signer
@@ -44,9 +44,13 @@ shards:
     github: crystal-loot/exception_page
     version: 0.1.2
 
+  faker:
+    github: askn/faker
+    version: 0.4.0
+
   garnet_spec:
     github: amberframework/garnet-spec
-    version: 0.2.1
+    version: 0.2.3
 
   granite:
     github: amberframework/granite
