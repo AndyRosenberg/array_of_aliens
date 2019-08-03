@@ -36,6 +36,11 @@ class User < Granite::Base
     Crypto::Bcrypt::Password.create(word).to_s
   end
 
+  def profile_pic
+    img = image.find_by(profile: true) || Image.new
+    img.object_url
+  end
+
   def name_string
     name.to_s.downcase
   end
