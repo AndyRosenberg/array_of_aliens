@@ -40,3 +40,15 @@ preferences = [
     object_url: "https://icon-library.net/images/default-user-icon/default-user-icon-11.jpg"
   )
 end
+
+User.all.each do |user|
+  distances = user.set_distances
+  User.all.each_with_index do |other, idx|
+    distances["#{other.id}"] = {
+      "location" => other.location,
+      "distance" => idx
+    }
+  end
+
+  user.update(distances: distances.to_json)
+end
