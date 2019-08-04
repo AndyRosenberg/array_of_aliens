@@ -93,7 +93,7 @@ class User < Granite::Base
     User.all.select do |user|
       preference_match?(user) &&
       distance_from(user) <= distance
-    end.sort_by(&.distance_from(self))
+    end.sort_by { |user| distance_from(user) }
   end
 
   def preference_match?(other : User)
