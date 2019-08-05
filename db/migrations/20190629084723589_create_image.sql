@@ -1,7 +1,7 @@
 -- +micrate Up
 CREATE TABLE images (
   id BIGSERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users,
+  user_id BIGINT REFERENCES users,
   profile BOOLEAN DEFAULT FALSE,
   object_key VARCHAR,
   object_url VARCHAR,
