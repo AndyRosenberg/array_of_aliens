@@ -33,6 +33,7 @@ Amber::Server.configure do
     resources "/users", UserController, only: [:new, :create]
     get "/confirm/:token", UserController, :confirm
     post "/confirmation/:token", UserController, :confirmation
+    get "/matches", UserController, :matches
   end
 
   routes :api do

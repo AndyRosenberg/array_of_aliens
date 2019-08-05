@@ -42,6 +42,14 @@ class UserController < ApplicationController
     end
   end
 
+  def matches
+    matches = User.first!.available_matches(20).map do |match|
+      { :name => match.name }
+    end.to_json
+
+    respond_with { json matches }
+  end
+
   private def get_truth(user : User)
     !user.new_record? && (params[:token] == user.token || user.sent_time? > 1.hour.ago)
   end

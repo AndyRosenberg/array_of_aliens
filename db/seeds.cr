@@ -37,7 +37,8 @@ preferences = [
 
   Image.create(
     user_id: user.id,
-    object_url: "https://icon-library.net/images/default-user-icon/default-user-icon-11.jpg"
+    object_url: "https://icon-library.net/images/default-user-icon/default-user-icon-11.jpg",
+    profile: true
   )
 end
 
