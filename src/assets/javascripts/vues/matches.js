@@ -5,17 +5,17 @@ import $ from 'cash-dom';
 new Vue({
   el: '#matches',
   created() {
-      this.fetchData();	
+    this.fetchData();	
   },
   methods: {
-      fetchData() {
+    fetchData() {
       axios.get('/matches').then(response => {
-          response.data.forEach(function(match) {
-            $('#matches').append(`
-              <p>${match.name}</p>
-            `);
-          });
+        response.data.forEach(function(match) {
+          $('#matches').append(`
+            <p>${match.name}</p>
+          `);
         });
-      }
+      });
+    }
   }
 });
