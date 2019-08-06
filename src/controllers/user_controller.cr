@@ -44,7 +44,12 @@ class UserController < ApplicationController
 
   def matches
     matches = User.first!.available_matches(20).map do |match|
-      { :name => match.name }
+      {
+        :name => match.name,
+        :pic => match.profile_pic,
+        :gender => match.gender,
+        :location => match.location
+      }
     end.to_json
 
     respond_with { json matches }

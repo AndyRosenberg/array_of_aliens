@@ -12,7 +12,14 @@ new Vue({
       axios.get('/matches').then(response => {
         response.data.forEach(function(match) {
           $('#matches').append(`
-            <p>${match.name}</p>
+            <figure>
+              <h5>${match.name}</h5>
+              <img src='${match.pic}' />
+              <figcaption>
+                <span>${match.gender}</span> ->
+                <span>${match.location}</span>
+              </figcaption>
+            </figure>
           `);
         });
       });
