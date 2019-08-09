@@ -1,0 +1,16 @@
+<div id="matchList">
+  <radio-dist dist="10"></radio-dist>
+  <radio-dist dist="25"></radio-dist>
+  <radio-dist dist="50"></radio-dist>
+  <radio-dist dist="100"></radio-dist>
+  <% matches.each do |match| %>
+    <figure>
+      <h5><%= match[:name] %></h5>
+      <img src='<%= match[:pic] %>' />
+      <figcaption>
+        <span><%= match[:gender] %></span> ->
+        <span><%= match[:location] %></span>
+      </figcaption>
+    </figure>
+  <% end %>
+</div>

@@ -50,9 +50,12 @@ class UserController < ApplicationController
         :gender => match.gender,
         :location => match.location
       }
-    end.to_json
+    end
 
-    respond_with { json matches }
+    respond_with do
+      json matches.to_json
+      html render("matches.ecr")
+    end
   end
 
   private def get_truth(user : User)
