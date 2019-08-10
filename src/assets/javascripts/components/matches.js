@@ -12,7 +12,7 @@ Vue.component('radio-dist', {
   `,
   methods: {
     fetchData: function() {
-      axios.get('/matches').then(response => {
+      axios.get('/matches', { params: { dist: dist } }).then(response => {
         $('#matchList figure').remove();
         response.data.forEach(function(match) {
           $('#matchList').append(`

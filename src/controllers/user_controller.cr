@@ -43,7 +43,8 @@ class UserController < ApplicationController
   end
 
   def matches
-    matches = User.first!.available_matches(20).map do |match|
+    dist = params[:dist]?.try(&.to_i) || 25
+    matches = User.first!.available_matches(dist).map do |match|
       {
         :name => match.name,
         :pic => match.profile_pic,
