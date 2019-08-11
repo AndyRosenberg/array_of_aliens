@@ -61,7 +61,7 @@ class UserController < ApplicationController
 
   def show
     user = User.find(params[:id]) || User.new
-    redirect_to "/" unless user
+    redirect_to "/" if user.new_record?
     render("show.ecr")
   end
 
