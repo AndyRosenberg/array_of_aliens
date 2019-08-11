@@ -30,7 +30,7 @@ Amber::Server.configure do
   routes :web do
     get "/", HomeController, :index
     post "/upload", HomeController, :upload
-    resources "/users", UserController, only: [:new, :create]
+    resources "/users", UserController, only: [:new, :create, :show]
     get "/confirm/:token", UserController, :confirm
     post "/confirmation/:token", UserController, :confirmation
     get "/matches", UserController, :matches

@@ -59,6 +59,12 @@ class UserController < ApplicationController
     end
   end
 
+  def show
+    user = User.find(params[:id]) || User.new
+    redirect_to "/" unless user
+    render("show.ecr")
+  end
+
   private def get_truth(user : User)
     !user.new_record? && (params[:token] == user.token || user.sent_time? > 1.hour.ago)
   end
