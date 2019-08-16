@@ -1,7 +1,35 @@
-$primary: #f4994b;
+$color1: rgba(239, 239, 239, 1);
+$color2: rgba(46, 134, 171, 1);
+$color3: rgba(162, 59, 114, 1);
+$color4: rgba(7, 7, 7, 1);
+$color5: rgba(209, 52, 91, 1);
+$primary: $color5;
+$secondary: $color2;
 
 @import '~bootstrap/scss/bootstrap';
 
-.main {
-  padding-top: 20px;
+body {
+  background: $color4;
+
+  nav .nav-link {
+    color: $color1 !important;
+  }
+
+  h5 {
+    color: $secondary;
+  }
+
+  figcaption {
+    color: rgba(162, 59, 114, .75);
+  }
+
+  .main {
+    padding-top: 20px;
+    background: $color1;
+    color: $color3;
+    min-height: 100%;
+    min-height: 120vw;
+    padding: 2rem;
+    border-radius: .15rem;
+  }
 }
