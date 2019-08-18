@@ -8,9 +8,11 @@ $primary: $color5;
 $secondary: $color2;
 
 @import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 body {
   background: $color4;
+  font-family: 'Nunito', sans-serif;
 
   nav .nav-link {
     color: $color1 !important;
