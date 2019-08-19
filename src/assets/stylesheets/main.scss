@@ -16,6 +16,12 @@ body {
 
   nav .nav-link {
     color: $color1 !important;
+    display: inline;
+    vertical-align: middle;
+  }
+
+  li.nav-item {
+    padding-top: .075rem;
   }
 
   h5 {
