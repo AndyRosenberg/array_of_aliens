@@ -34,6 +34,11 @@ Amber::Server.configure do
     get "/confirm/:token", UserController, :confirm
     post "/confirmation/:token", UserController, :confirmation
     get "/matches", UserController, :matches
+    resources "/conversations", ConversationController, only: [:create, :show, :destroy]
+  end
+
+  routes :web, "/conversations/:conversation_id" do
+    resources "/messages", MessageController, only: [:create, :destroy]
   end
 
   routes :api do
