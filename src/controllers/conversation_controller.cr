@@ -3,6 +3,7 @@ class ConversationController < ApplicationController
   end
 
   def show
+    conversation = Conversation.find(params[:id]) || Conversation.new
     render("show.ecr")
   end
 

@@ -1,1 +1,15 @@
-<p>Placeholder for messages</p>
+<% conversation.message.each do |msg| %>
+  <div class="message">
+    <p><%= msg.user.try(&.name) %></p>
+    <pre><%= msg.body %></pre>
+  </div>
+<% end %>
+
+<form action="/messages" method="post">
+  <h4 class="mb-2">New Message:</h4>
+  <%= csrf_tag %>
+  <div class="form-group">
+    <textarea name="body" id="body" class="form-control"></textarea>
+  </div>
+  <input type="submit" value="Send" class="btn btn-primary btn-block">
+</form>
