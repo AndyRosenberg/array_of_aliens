@@ -24,6 +24,7 @@ class User < Granite::Base
   field accepted : Bool
 
   has_many :image
+  has_many :message
 
   def self.create_with_bcrypt(name : String, mail : String, word : String)
     user = new(name: name, email: mail, password: word)

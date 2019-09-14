@@ -50,6 +50,7 @@ dependencies:
 
   awscr-s3:
     github: taylorfinnell/awscr-s3
+    version: 0.4.0
 
 development_dependencies:
   garnet_spec:
