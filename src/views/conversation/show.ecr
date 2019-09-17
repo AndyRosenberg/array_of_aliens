@@ -5,9 +5,10 @@
   </div>
 <% end %>
 
-<form action="/messages" method="post">
+<form action=<%= "/conversations/#{params[:id]}/messages" %> method="post">
   <h4 class="mb-2">New Message:</h4>
   <%= csrf_tag %>
+  <input type="hidden" name="recipient_id" value="<%= other_id %>">
   <div class="form-group">
     <textarea name="body" id="body" class="form-control"></textarea>
   </div>
