@@ -30,6 +30,9 @@ Amber::Server.configure do
   routes :web do
     get "/", HomeController, :index
     post "/upload", HomeController, :upload
+    get "/login", LoginController, :log_in
+    post "/login", LoginController, :authenticate
+    get "/logout", LoginController, :log_out
     resources "/users", UserController, only: [:new, :create, :show]
     get "/confirm/:token", UserController, :confirm
     post "/confirmation/:token", UserController, :confirmation

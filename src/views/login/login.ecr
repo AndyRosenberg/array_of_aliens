@@ -1,0 +1,17 @@
+<div class="login-clean"> 
+  <form action="/login" method="post">
+    <h3 class="mb-3">Log In:</h3>
+    <%= csrf_tag %>
+    <div class="form-group">
+      <label for="email" id="email_label">Email:</label>
+      <input type="email" name="email" id="email" value="" placeholder="Email" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="email" id="password_label">Password:</label>
+      <input type="password" name="password" id="password" value="" placeholder="Password" class="form-control">
+    </div>
+
+    <input type="submit" value="Log In" id="log_in" class="btn btn-primary btn-block">
+    <a class="float-right small pt-2" href="#">Forgot Password?</a>
+  </form>
+</div>
