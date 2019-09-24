@@ -1,4 +1,4 @@
-<% conversation.message.each do |msg| %>
+<% conversation.messages.each do |msg| %>
   <div class="message">
     <p><%= msg.user.try(&.name) %></p>
     <pre><%= msg.body %></pre>

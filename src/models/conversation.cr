@@ -4,11 +4,12 @@ class Conversation < Granite::Base
 
   primary id : Int64
   timestamps
-  has_many :message
+  has_many :messages, class_name: Message
+  has_many :user, through: :messages
 
   def non_current_user_id(current_user : User | Nil)
     return nil unless current_user
     current_user ||= User.new
-    message.map(&.user_id).uniq.reject(&.==(current_user.id))[0]?
+    user.find { |user| user.id != current_user.id }.try(&.id)
   end
 end
