@@ -3,6 +3,8 @@ class Conversation < Granite::Base
   table_name conversations
 
   primary id : Int64
+  field starter_id : Int64
+  field recipient_id : Int64
   timestamps
   has_many :messages, class_name: Message
   has_many :user, through: :messages
